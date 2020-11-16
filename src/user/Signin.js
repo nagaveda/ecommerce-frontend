@@ -60,9 +60,9 @@ const Signin = () =>{
                 return <p>redirect to user dashboard</p>
             }
         }
-        // if (isAuthenticated()){
-        //     return <Redirect to="/" />
-        // }
+        if (isAuthenticated()){
+            return <Redirect to="/" />
+        }
     }
     const loadingMessage = () => {
         return(
