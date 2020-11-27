@@ -8,6 +8,8 @@ import UserDashBoard from './user/UserDashBoard';
 import AdminRoute from './auth/helper/AdminRoutes';
 import PrivateRoute from './auth/helper/PrivateRoutes';
 import AddCategory from './admin/AddCategory';
+import ManageCategories from './admin/ManageCategories';
+import AddProduct from './admin/AddProduct';
 
 
 const Routes = () => {
@@ -19,6 +21,9 @@ const Routes = () => {
                 <Route path="/signin" component={Signin} />
                 <AdminRoute path="/admin/dashboard" component={AdminDashBoard} />
                 <AdminRoute path="/admin/create/category" component={AddCategory} />
+                <AdminRoute path="/admin/categories" component={ManageCategories} />
+                {/*  */}
+                <AdminRoute path="/admin/create/product" component={AddProduct} />
                 <PrivateRoute path="/user/dashboard" component={UserDashBoard} />
 
             </Switch>
