@@ -72,7 +72,7 @@ const AddProduct = () =>{
         createProduct(user._id, token, formData)
         .then(data=>{
           if(data.error){
-            setValues({...values, error: data.error});
+            setValues({...values, error: data.error, loading:false});
             console.log(data);
           }
           else{

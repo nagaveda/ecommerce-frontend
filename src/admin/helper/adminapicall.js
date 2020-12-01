@@ -18,6 +18,18 @@ export const createCategory = (userId, token, category) => {
     })
 };
 
+//get a category
+
+export const getCategory = (categoryId) => {
+    return fetch(`${API}/category/${categoryId}`, {
+        method: "GET"
+    })
+    .then(resp=>{
+        return resp.json();
+    })
+    .catch(err=>console.log(err));
+};
+
 //get all categories
  export const getCategories = () =>{
      return fetch(`${API}/categories`, {
@@ -27,6 +39,41 @@ export const createCategory = (userId, token, category) => {
          return resp.json();
      })
      .catch(err=>console.log(err));
+ };
+
+ // Update a category
+ export const updateCategory = (categoryId, userId, token, category) => {
+    return fetch(`${API}/category/${categoryId}/${userId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "AUthorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(category)
+    })
+    .then(resp => {
+        return resp.json()
+    })
+    .catch(err => {
+        console.log(err);
+    })
+ };
+
+ // Delete a category
+ 
+ export const deleteCategory = (categoryId, userId, token) => {
+     return fetch(`${API}/category/${categoryId}/${userId}`, {
+         method: "DELETE",
+         headers:{
+             "Content-Type": "application/json",
+             "Authorization": `Bearer ${token}`
+         }
+     })
+     .then(response=>{
+        return response.json();
+    })
+    .catch(err=> console.log(err));
+
  }
 
 //product calls
