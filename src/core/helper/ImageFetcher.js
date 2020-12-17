@@ -2,8 +2,10 @@ import React from "react";
 import { API } from "../../backend";
 
 const ImageFetcher = ({product}) => {
-    var imageUrl = product ? `${API}/product/photo/${product._id}`: `https://images.pexels.com/photos/2756845/pexels-photo-2756845.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`
+    const imageUrl = product ? `${API}/product/photo/${product._id}`: `https://images.pexels.com/photos/2756845/pexels-photo-2756845.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`
+    // console.log(imageUrl);
     return (
+      
         <div className="rounded border border-success p-2">
         <img
           src={imageUrl}
