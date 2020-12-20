@@ -4,6 +4,7 @@ import { API } from "../backend";
 import Base from "./Base";
 import Card from "./Card";
 import { loadCart } from "./helper/cartHelper";
+import StripeCheckout from "./StripeCheckout";
 
 
 
@@ -39,7 +40,11 @@ const  Cart = () => {
   const loadCheckout = () => {
     return (
         <div>
-            <h2>Checkout</h2>
+            <StripeCheckout 
+            products={products}
+            setReload = {setReload}  
+            reload = {reload}
+            />
         </div>
     )
 };
