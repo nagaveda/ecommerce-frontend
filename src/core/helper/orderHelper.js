@@ -6,7 +6,7 @@ export const createOrder = (userId, token, orderData) => {
         headers:{
             Accept: "application/json",
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({order: orderData})
     }).then(respone => {

@@ -29,9 +29,10 @@ export default function Home() {
   }, []);
   
   return (
-    <Base title="Homepage" description="Welcome to the Store!">
+    <Base title="iStore" description="Welcome to the Store!">
+      <h1 className="text-white text-center">All Products</h1>
       <div className="row text-center">
-        <h1 className="text-white">All Products</h1>
+        
         <div className="row">
           {products.map((product, index)=>{
             return (

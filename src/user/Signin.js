@@ -119,13 +119,13 @@ const Signin = () =>{
     }
 
     return(
-        <Base title="Sign in page" description="A page for user to sign in!">
+        <Base title="Sign in" description="Sign in to your account!">
             {SignInForm()}
             {performRedirect()}
             {loadingMessage()}
             {errorMessage()}
             <p className="text-white text-center">
-            {JSON.stringify(values)}
+            {/* {JSON.stringify(values)} */}
             </p>
         </Base>
     )

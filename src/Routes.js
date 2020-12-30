@@ -14,6 +14,10 @@ import ManageProducts from './admin/ManageProducts';
 import UpdateProduct from './admin/UpdateProduct';
 import UpdateCategory from './admin/UpdateCategory';
 import Cart from './core/Cart';
+import UpdateUser from './user/UpdateUser';
+import ManageOrders from './admin/ManageOrders';
+import UpdateOrderStatus from './admin/UpdateOrderStatus';
+import Orders from './user/Orders';
 
 
 const Routes = () => {
@@ -30,9 +34,13 @@ const Routes = () => {
                 {/*  */}
                 <AdminRoute path="/admin/create/product" component={AddProduct} />
                 <AdminRoute path="/admin/products" component={ManageProducts} />
+                <AdminRoute path="/admin/orders" component={ManageOrders} />
                 <AdminRoute path="/admin/product/update/:productId" component={UpdateProduct} />
                 <AdminRoute path="/admin/category/update/:categoryId" component={UpdateCategory} />
+                <AdminRoute path="/admin/order/update/:orderId" component={UpdateOrderStatus} />
                 <PrivateRoute path="/user/dashboard" component={UserDashBoard} />
+                <PrivateRoute path="/user/update" component={UpdateUser} />
+                <PrivateRoute path="/user/orders" component={Orders} />
 
             </Switch>
         </BrowserRouter>

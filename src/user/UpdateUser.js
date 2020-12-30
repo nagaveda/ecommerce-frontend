@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Base from "../core/Base";
 import {Link} from 'react-router-dom';
-import { signup } from "../auth/helper";
+import { getProfile, updateProfile } from "./helper/userapicalls";
+import { isAuthenticated, signout } from "../auth/helper";
 
+const UpdateUser = () =>{
 
-const Signup = () =>{
+    const {user, token} = isAuthenticated();
 
     const [values, setValues] = useState({
         name:"",
@@ -18,12 +20,29 @@ const Signup = () =>{
     
     const handleChange = name => event => {
         setValues({...values, error:false, [name]:event.target.value})
-    }
+    };
+
+    const preload = () => {
+        getProfile(user._id, token)
+        .then(data=>{
+            console.log("PROFILE...", data);
+            setValues({
+                ...values,
+                name: data.name,
+                email: data.email
+            });
+        })
+        
+    };
+
+    useEffect(()=>{
+        preload();
+    }, []);
 
     const onSubmit = (event) => {
         event.preventDefault();
         setValues({...values, error:false});
-        signup({name, email, password})
+        updateProfile(user._id, token, {name, email, password})
         .then(data => {
             if(data.error){
                 setValues({...values, error:data.error, success: false})
@@ -37,12 +56,15 @@ const Signup = () =>{
                     error:"",
                     success:true
                 });
+                signout(()=>{
+                    console.log("User Signed out.. ")
+                })
             }
         })
-        .catch(console.log("Error in signup"));
+        .catch(console.log("Error in updation"));
     }
 
-    const SignUpForm = () =>{
+    const UpdationForm = () =>{
         return(
             <div classname="row">
                 <div className="col-md-6 offset-sm-3 text-left">
@@ -63,14 +85,6 @@ const Signup = () =>{
                              value={email}
                              type="email"/>
                         </div>
-                        <div className="form-group">
-                            <label className="text-light">Password</label>
-                            <input 
-                            className="form-control" 
-                            value={password}
-                            onChange={handleChange("password")} 
-                            type="password"/>
-                        </div>
                         <button onClick={onSubmit} className="btn btn-success btn-block">
                             Submit
                         </button>
@@ -87,8 +101,9 @@ const Signup = () =>{
             <div classname="row">
                 <div className="col-md-6 offset-sm-3 text-left">
                     <div className="alert alert-success"
-                    style={{display:success ? "" : "none"}}>
-                        New account created successfully. Please <Link to="/signin">Login Here</Link>
+                    style={{display:success ? "" : "none"}}
+                    >
+                        Profile updated successfully. Please <Link to="/signin">Login again</Link>
                     </div>  
                 </div>
             </div>
@@ -107,13 +122,15 @@ const Signup = () =>{
         )
     }
     return(
-        <Base title="Sign up" description="Create a new account here!">
-            
-            {SignUpForm()}
+        <Base title="Update Profile" description="You can update your profile here...">
+            <Link className="btn btn-info" to={`/user/dashboard`}>
+                <span className="">User Dashboard</span>
+            </Link>
+            {UpdationForm()}
             {successMessage()}
             {errorMessage()}            
         </Base>
     )
 };
 
-export default Signup;
+export default UpdateUser;

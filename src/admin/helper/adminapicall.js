@@ -151,3 +151,49 @@ export const updateProduct = (userId, token, productId, product) => {
     })
     .catch(err=> console.log(err));
 };
+
+export const getOrders = (userId, token) => {
+    return fetch(`${API}/order/all/${userId}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
+    .then(response => {
+        return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+export const updateOrderStatus = (userId, token, orderId, orderData) => {
+    return fetch(`${API}/order/${orderId}/status/update/${userId}`, {
+        method:"PUT",
+        headers: {
+            "Content-Type":"application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => {
+        return response.json();
+    })
+    .catch(err=>console.log(err));
+};
+
+
+export const getOrderStatus = (userId, token, orderId) => {
+    return fetch(`${API}/order/${orderId}/status/${userId}`, {
+        method:"GET",
+        headers: {
+            
+            "Content-Type":"application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
+    .then(response=>{
+        
+        return response.json();
+    })
+    .catch(err=>console.log(err));
+};
